@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Nhạc Nền</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h2>Chào mừng bạn!</h2>
+    <p id="status">Đang phát nhạc...</p>
+  </div>
+
+  <audio id="bgMusic" src="nhac.mp3" autoplay loop playsinline></audio>
+
+  <script>
+    const audio = document.getElementById('bgMusic');
+
+    function playMusic() {
+      audio.play().then(() => {
+        document.getElementById('status').textContent = 'Đang phát nhạc nền';
+      }).catch(() => {
+        // Trình duyệt chặn tự phát có tiếng cho tới khi người dùng chạm vào màn hình
+        document.getElementById('status').textContent = 'Chạm bất kỳ đâu để bật nhạc';
+      });
+    }
+
+    window.addEventListener('load', playMusic);
+    document.addEventListener('click', playMusic, { once: true });
+    document.addEventListener('touchstart', playMusic, { once: true });
+  </script>
+</body>
+</html>
